@@ -5,7 +5,8 @@ date: "Sunday, September 14, 2014"
 output: html_document
 
 ---
-```{r}
+
+```r
 ## The Code below is designed to Load and preprocess data
 ## The 0 values and NA values will be removed from the dataset.
 url<-"http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
@@ -23,21 +24,48 @@ omitdata$steps <-as.numeric(omitdata$steps)
 omitdata$date <- as.Date(omitdata$date, format = "%Y-%m-%d")
 sumdata <- aggregate(omitdata$steps, by=list(omitdata$date), FUN=sum)
 hist(sumdata$x, main="Total number of steps per day",xlab="Steps per day", ylab="Frequency")
+```
+
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1.png) 
+
+```r
 mean(sumdata$x)
+```
+
+```
+## [1] 10766
+```
+
+```r
 median(sumdata$x)
 ```
 
-```{r}
+```
+## [1] 10765
+```
+
+
+```r
 ## What is the average daily activity pattern??
 ## A time series plot is created of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 ## The 5-minute interval, on average across all the days in the dataset, containing the maximum number of steps is displayed?
 omitdata$interval <- format(omitdata$interval, format="%H%M")
 averagesteps <- aggregate(omitdata$steps, list(interval = omitdata$interval),mean)
 plot(averagesteps$interval,averagesteps$x,type="l", main="Average number of steps per interval", xlab="5 min intervals(hhmm)", ylab="Average number of steps" )
+```
+
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+
+```r
 max(averagesteps$x)
 ```
 
-```{r, results = 'hide'}
+```
+## [1] 352.5
+```
+
+
+```r
 ## Imputing missing values
 data <- read.csv("activity.csv")
 ## Total numbers of missing values in the dataset
@@ -46,13 +74,24 @@ data$interval <- sprintf("%04d", data$interval)
 ## The strategy used to fill in missing data is to update each interval with the
 ## mean for that 5 minute interval.
 data$steps[is.na(data$steps)] <- averagesteps[match(data$interval, averagesteps$interval),2]
+```
+
+```
+## Warning: number of items to replace is not a multiple of replacement
+## length
+```
+
+```r
 data$steps[data$steps==0] <- NA
 na.omit(data$steps)
 ## Updated histogram containing substituted values
 hist(data$steps,main="Total number of steps per day",xlab="Steps per day", ylab="Frequency")
 ```
 
-```{r, results = 'hide'}
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+
+
+```r
 ## Are there differences in activity patterns between weekdays and weekends?
 data <- read.csv("activity.csv")
 data$steps[is.na(data$steps)] <- 0
@@ -69,3 +108,5 @@ par(mfrow = c(2,1), mar = c(4,4,2,1), oma = c(0,0,2,0))
 WeekdayPlot <- plot(averageweekplotdata$interval,averageweekplotdata$x,type="l", main="Average Number of steps per week", xlab="Frequency", ylab="Interval")
 WeekendPlot <- plot(averageweekendplotdata$interval, averageweekendplotdata$x, type="l",main= "Average Number of steps per weekend", xlab="Frequency",ylab="Interval")
 ```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
