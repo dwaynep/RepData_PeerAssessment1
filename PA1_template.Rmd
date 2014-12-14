@@ -1,9 +1,8 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
+title: 'Reproducible Research: Peer Assessment 1'
 author: "Dwayne Pindling"
-date: "Sunday, September 14, 2014"
+date: "Sunday, December 14th, 2014"
 output: html_document
-
 ---
 ```{r}
 ## The Code below is designed to Load and preprocess data
