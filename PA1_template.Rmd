@@ -1,9 +1,21 @@
 ---
 title: 'Reproducible Research: Peer Assessment 1'
 author: "Dwayne Pindling"
-date: "Sunday, December 14th, 2014"
+date: "Sunday, February 8th, 2015"
 output: html_document
 ---
+
+--------
+Synopsis
+--------
+
+  The following report makes use of data from a personal activity monitoring device(i.e. Fitbit,Nike Fuelband, Jawbone Up. <br/>The dataset (Activity monitoring data) consists of two months of data collects from an individual during the months of October and November 2012. 
+  
+<br/>The report will answer the following questions related to the individuals personal activity.
+<br/>1. What is mean total number of steps taken per day?
+<br/>2. What is the average daily activity pattern?
+<br/>3. Are there differences in activity pattern between weekdays and weekends?
+
 ```{r}
 ## The Code below is designed to Load and preprocess data
 ## The 0 values and NA values will be removed from the dataset.
